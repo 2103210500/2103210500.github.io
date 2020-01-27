@@ -168,8 +168,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#####单片机型号：STC15F2K60S2</p>
-<blockquote>
+        <h5 id="单片机型号：STC15F2K60S2"><a href="#单片机型号：STC15F2K60S2" class="headerlink" title="单片机型号：STC15F2K60S2"></a>单片机型号：STC15F2K60S2</h5><blockquote>
 <p>代码兼容89等其它系列单片机</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  *@str 传输的数据地址</span></span><br><span class="line"><span class="comment">  *@len 数据长度</span></span><br><span class="line"><span class="comment">  *若数组有3个数据，len长度应填写为4</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">getCRC16</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> * str,<span class="keyword">unsigned</span> <span class="keyword">char</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> c,i,s = <span class="number">0xffff</span>;</span><br><span class="line">    <span class="keyword">while</span>(len--)</span><br><span class="line">    &#123;</span><br><span class="line">        s ^= *str++;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span>( s&amp;<span class="number">1</span> ) s = (s&gt;&gt;<span class="number">1</span>)^<span class="number">0xA001</span>;</span><br><span class="line">            <span class="keyword">else</span> s &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    c = s&gt;&gt;<span class="number">8</span>;</span><br><span class="line">    c |= s&lt;&lt;<span class="number">8</span>;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -234,17 +233,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##Hello!</p>
-<blockquote>
-<p>这是他写下的第一篇文章，由于他很懒，将不会有很多文章，你可联系<a href="mailto:2103210500@qq.com">2103210500@qq.com</a>来催促它<br>#2020！新年快乐！</p>
+        <h2 id="Hello"><a href="#Hello" class="headerlink" title="Hello!"></a>Hello!</h2><blockquote>
+<p>这是他写下的第一篇文章，由于他很懒，将不会有很多文章，你可联系<a href="mailto:2103210500@qq.com">2103210500@qq.com</a>来催促它<br>#2020！祝大家新年快乐！</p>
 </blockquote>
 <hr>
-<p>####C语言大法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"新年快乐，%d！"</span>，<span class="number">2020</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="C语言大法"><a href="#C语言大法" class="headerlink" title="C语言大法"></a>C语言大法</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"新年快乐，%d！"</span>，<span class="number">2020</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>####奈斯~</p>
-</blockquote>
+<h4 id="奈斯"><a href="#奈斯" class="headerlink" title="奈斯~"></a>奈斯~</h4></blockquote>
 
       
 

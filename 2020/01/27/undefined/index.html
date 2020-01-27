@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://2103210500.github.io">
   <title>基于51单片机的ModBus通讯协议CRC16校验 | 梦归处 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#####单片机型号：STC15F2K60S2  代码兼容89等其它系列单片机  123456789101112131415161718192021&#x2F;**  *@str 传输的数据地址  *@len 数据长度  *若数组有3个数据，len长度应填写为4*&#x2F;unsigned int getCRC16(unsigned char * str,unsigned char len)&amp;#123;    un">
+  <meta name="description" content="单片机型号：STC15F2K60S2 代码兼容89等其它系列单片机  123456789101112131415161718192021&#x2F;**  *@str 传输的数据地址  *@len 数据长度  *若数组有3个数据，len长度应填写为4*&#x2F;unsigned int getCRC16(unsigned char * str,unsigned char len)&amp;#123;    unsigned">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于51单片机的ModBus通讯协议CRC16校验">
 <meta property="og:url" content="https://2103210500.github.io/2020/01/27/undefined/index.html">
 <meta property="og:site_name" content="梦归处 Blog">
-<meta property="og:description" content="#####单片机型号：STC15F2K60S2  代码兼容89等其它系列单片机  123456789101112131415161718192021&#x2F;**  *@str 传输的数据地址  *@len 数据长度  *若数组有3个数据，len长度应填写为4*&#x2F;unsigned int getCRC16(unsigned char * str,unsigned char len)&amp;#123;    un">
+<meta property="og:description" content="单片机型号：STC15F2K60S2 代码兼容89等其它系列单片机  123456789101112131415161718192021&#x2F;**  *@str 传输的数据地址  *@len 数据长度  *若数组有3个数据，len长度应填写为4*&#x2F;unsigned int getCRC16(unsigned char * str,unsigned char len)&amp;#123;    unsigned">
 <meta property="og:locale" content="zh">
 <meta property="article:published_time" content="2020-01-27T05:46:06.000Z">
-<meta property="article:modified_time" content="2020-01-27T06:08:04.604Z">
+<meta property="article:modified_time" content="2020-01-27T06:24:00.740Z">
 <meta property="article:author" content="梦归处">
 <meta name="twitter:card" content="summary">
   
@@ -168,34 +168,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#####单片机型号：STC15F2K60S2</p>
-<blockquote>
+        <h5 id="单片机型号：STC15F2K60S2"><a href="#单片机型号：STC15F2K60S2" class="headerlink" title="单片机型号：STC15F2K60S2"></a>单片机型号：STC15F2K60S2</h5><blockquote>
 <p>代码兼容89等其它系列单片机</p>
 </blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  *@str 传输的数据地址</span></span><br><span class="line"><span class="comment">  *@len 数据长度</span></span><br><span class="line"><span class="comment">  *若数组有3个数据，len长度应填写为4</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">getCRC16</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> * str,<span class="keyword">unsigned</span> <span class="keyword">char</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> c,i,s = <span class="number">0xffff</span>;</span><br><span class="line">    <span class="keyword">while</span>(len--)</span><br><span class="line">    &#123;</span><br><span class="line">        s ^= *str++;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span>( s&amp;<span class="number">1</span> ) s = (s&gt;&gt;<span class="number">1</span>)^<span class="number">0xA001</span>;</span><br><span class="line">            <span class="keyword">else</span> s &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    c = s&gt;&gt;<span class="number">8</span>;</span><br><span class="line">    c |= s&lt;&lt;<span class="number">8</span>;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
