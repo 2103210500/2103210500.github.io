@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://2103210500.github.io">
-  <title>Archives | 梦归处 Blog</title>
+  <title>基于CH340的51单片机自动下载电路设计 | 梦归处 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="凯旋">
-<meta property="og:type" content="website">
-<meta property="og:title" content="梦归处 Blog">
-<meta property="og:url" content="https://2103210500.github.io/archives/index.html">
+  <meta name="description" content="C4左端连接在CH340的RTS#引脚，根据CH340官方解释，此引脚为MODEM联络输出信号，请求发送，具体我也没有看个明白，不过根据实际测量，RTS#引脚上电默认为高电平，在下载程序或者打开串口时，此引脚电平会发生跳变，从高电平变为低电平，直到程序下载结束或关闭串口恢复为高电平，利用此引脚，实现51单片机的一键自动下载电路，但有一缺陷，在打开串口时同样会重启单片机，对一些串口通讯模块可能会照成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于CH340的51单片机自动下载电路设计">
+<meta property="og:url" content="https://2103210500.github.io/2020/02/12/ch340-auto-download/index.html">
 <meta property="og:site_name" content="梦归处 Blog">
-<meta property="og:description" content="凯旋">
+<meta property="og:description" content="C4左端连接在CH340的RTS#引脚，根据CH340官方解释，此引脚为MODEM联络输出信号，请求发送，具体我也没有看个明白，不过根据实际测量，RTS#引脚上电默认为高电平，在下载程序或者打开串口时，此引脚电平会发生跳变，从高电平变为低电平，直到程序下载结束或关闭串口恢复为高电平，利用此引脚，实现51单片机的一键自动下载电路，但有一缺陷，在打开串口时同样会重启单片机，对一些串口通讯模块可能会照成">
 <meta property="og:locale" content="zh">
+<meta property="og:image" content="https://2103210500.github.io/2020/02/12/ch340-auto-download/a1.jpg">
+<meta property="article:published_time" content="2020-02-12T08:49:02.000Z">
+<meta property="article:modified_time" content="2020-02-12T09:00:38.651Z">
 <meta property="article:author" content="梦归处">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://2103210500.github.io/2020/02/12/ch340-auto-download/a1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="梦归处 Blog" type="application/atom+xml">
   
@@ -142,157 +146,96 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-ch340-auto-download" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      基于CH340的51单片机自动下载电路设计
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/12/ch340-auto-download/" class="archive-article-date">
+
+        
+        <a href="/2020/02/12/ch340-auto-download/" class="archive-article-date">
   	<time datetime="2020-02-12T08:49:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/12/ch340-auto-download/">基于CH340的51单片机自动下载电路设计</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>C4左端连接在CH340的RTS#引脚，根据CH340官方解释，此引脚为MODEM联络输出信号，请求发送，具体我也没有看个明白，不过根据实际测量，RTS#引脚上电默认为高电平，在下载程序或者打开串口时，此引脚电平会发生跳变，从高电平变为低电平，直到程序下载结束或关闭串口恢复为高电平，利用此引脚，实现51单片机的一键自动下载电路，但有一缺陷，在打开串口时同样会重启单片机，对一些串口通讯模块可能会照成影响，曾经使用自动下载器做串口通信连接语音模块时，导致模块无法通信，最终发现其原因就是因为自动下载电路的影响。</p>
+<h3 id="电路分析"><a href="#电路分析" class="headerlink" title="电路分析"></a>电路分析</h3><p>上电时由于RTS#引脚为高电平，Q4基极也为高电平，C4两端无电压，Q4为不导通状态，视为高阻态状态，故集电极C电压约为5V，此时MOS管导通，下载器输出5V。当下载程序时，RTS#引脚由高转低，经过C4使Q4导通，并使集电极电位降低，此时mos管关断，切断5V电源。但是由于上拉电阻R6的存在，C4有一个缓慢充电的过程，直到C4两端电压达到5V，当电压逐渐升高，Q4由导通变为关断，此时mos管导通，恢复5V电源供电。断电后恢复供电有一个时间间隔，调节C4和R6来改变间隔时间，改变单片机重启速度。<br>RC充电时间计算公式：T = - RC * ln( (VCC - Vt)/Vcc)<br>由于电路连接了三极管会吸收电流，具体充电时间需实际测量和测试来选择合适的电容电阻大小<br><img src="https://2103210500.github.io/2020/02/12/ch340-auto-download/a1.jpg"></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/06/lg_user/" class="archive-article-date">
-  	<time datetime="2020-02-06T05:39:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-06</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/06/lg_user/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">力控登录界面账号密码判断逻辑</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/06/lg_user/">力控登录界面账号密码判断逻辑</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://2103210500.github.io/2020/02/12/ch340-auto-download/", 
+    sourceId: "ch340-auto-download",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/28/ws2812/" class="archive-article-date">
-  	<time datetime="2020-01-28T05:18:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/28/ws2812/">基于STM32实现WS2812驱动及GRB流水效果</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/27/modbus_crc16/" class="archive-article-date">
-  	<time datetime="2020-01-27T05:46:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/27/modbus_crc16/">基于51单片机的ModBus通讯协议CRC16校验</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/21/hello-world/" class="archive-article-date">
-  	<time datetime="2020-01-21T11:28:22.623Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/21/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -315,8 +258,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
