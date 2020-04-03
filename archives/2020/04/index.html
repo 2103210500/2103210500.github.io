@@ -6,17 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://2103210500.github.io">
-  <title>51modbus | 梦归处 Blog</title>
+  <title>Archives: 2020/4 | 梦归处 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基于51单片机的ModeBus通讯协议实现定义全局变量12345678910u8 bf[15];				&#x2F;&#x2F;接收数据缓存数组u8 sb[15] &#x3D; &amp;#123;2,3,4&amp;#125;;	&#x2F;&#x2F;发送数据数组&#x2F;*	2 代表远端站号	3:通讯功能码（03：读寄存器）	4：数长度	（4 数据大小为4字节）*&#x2F;	u8 time,				&#x2F;&#x2F;超时判断时间记录变量	flag,				&#x2F;&#x2F;数据接收标志位	len,">
-<meta property="og:type" content="article">
-<meta property="og:title" content="51modbus">
-<meta property="og:url" content="https://2103210500.github.io/2020/03/13/51modbus/index.html">
+  <meta name="description" content="凯旋">
+<meta property="og:type" content="website">
+<meta property="og:title" content="梦归处 Blog">
+<meta property="og:url" content="https://2103210500.github.io/archives/2020/04/index.html">
 <meta property="og:site_name" content="梦归处 Blog">
-<meta property="og:description" content="基于51单片机的ModeBus通讯协议实现定义全局变量12345678910u8 bf[15];				&#x2F;&#x2F;接收数据缓存数组u8 sb[15] &#x3D; &amp;#123;2,3,4&amp;#125;;	&#x2F;&#x2F;发送数据数组&#x2F;*	2 代表远端站号	3:通讯功能码（03：读寄存器）	4：数长度	（4 数据大小为4字节）*&#x2F;	u8 time,				&#x2F;&#x2F;超时判断时间记录变量	flag,				&#x2F;&#x2F;数据接收标志位	len,">
+<meta property="og:description" content="凯旋">
 <meta property="og:locale" content="zh">
-<meta property="article:published_time" content="2020-03-13T11:02:16.000Z">
-<meta property="article:modified_time" content="2020-03-16T11:02:58.848Z">
 <meta property="article:author" content="梦归处">
 <meta name="twitter:card" content="summary">
   
@@ -144,110 +142,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-51modbus" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      51modbus
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/04/03/uart_dma_receive/" class="archive-article-date">
+  	<time datetime="2020-04-03T15:23:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/04/03/uart_dma_receive/">STM32F429使用HAL库串口DMA不定长度数据接收</a>
     </h1>
   
 
-        
-        <a href="/2020/03/13/51modbus/" class="archive-article-date">
-  	<time datetime="2020-03-13T11:02:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="基于51单片机的ModeBus通讯协议实现"><a href="#基于51单片机的ModeBus通讯协议实现" class="headerlink" title="基于51单片机的ModeBus通讯协议实现"></a>基于51单片机的ModeBus通讯协议实现</h3><h4 id="定义全局变量"><a href="#定义全局变量" class="headerlink" title="定义全局变量"></a>定义全局变量</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">u8 bf[<span class="number">15</span>];				<span class="comment">//接收数据缓存数组</span></span><br><span class="line">u8 sb[<span class="number">15</span>] = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;	<span class="comment">//发送数据数组</span></span><br><span class="line"><span class="comment">/*	2 代表远端站号</span></span><br><span class="line"><span class="comment">	3:通讯功能码（03：读寄存器）</span></span><br><span class="line"><span class="comment">	4：数长度	（4 数据大小为4字节）*/</span></span><br><span class="line">	</span><br><span class="line">u8 time,				<span class="comment">//超时判断时间记录变量</span></span><br><span class="line">	flag,				<span class="comment">//数据接收标志位</span></span><br><span class="line">	len,				<span class="comment">//数据长度</span></span><br><span class="line">	blen;				<span class="comment">//缓存数据长度</span></span><br></pre></td></tr></table></figure>
+        <div class="article-info info-on-right">
+          
+          
 
-<h4 id="初始化串口为9600波特率"><a href="#初始化串口为9600波特率" class="headerlink" title="初始化串口为9600波特率"></a>初始化串口为9600波特率</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	SCON = <span class="number">0x50</span>;                <span class="comment">//8位可变波特率</span></span><br><span class="line">    TL1 = (<span class="number">65536</span> - (FOSC/<span class="number">4</span>/<span class="number">12</span>/<span class="number">9600</span>));   <span class="comment">//设置波特率重装值</span></span><br><span class="line">    TH1 = (<span class="number">65536</span> - (FOSC/<span class="number">4</span>/<span class="number">12</span>/<span class="number">9600</span>))&gt;&gt;<span class="number">8</span>;</span><br><span class="line">    TR1 = <span class="number">1</span>;                    <span class="comment">//定时器1开始启动</span></span><br><span class="line">    ES = <span class="number">1</span>;                     <span class="comment">//使能串口中断</span></span><br><span class="line">	</span><br><span class="line"><span class="comment">//串口中断函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Uart</span><span class="params">()</span> interrupt 4</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (RI)</span><br><span class="line">    &#123;</span><br><span class="line">        RI = <span class="number">0</span>;                 <span class="comment">//清除RI位</span></span><br><span class="line">		bf[blen++] = SBUF;		<span class="comment">//将数据存入缓存数组，并且缓存长度+1</span></span><br><span class="line">		time = <span class="number">11</span>;				<span class="comment">//设置超时时间为10ms</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="配置定时器用开数据接收超时判断"><a href="#配置定时器用开数据接收超时判断" class="headerlink" title="配置定时器用开数据接收超时判断"></a>配置定时器用开数据接收超时判断</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">    TMOD = <span class="number">0x00</span>;                    <span class="comment">//设置定时器为模式0(16位自动重装载)</span></span><br><span class="line">    TL0 = -（<span class="number">11059200</span>/<span class="number">1000</span>）;       <span class="comment">//定时为1MS</span></span><br><span class="line">    TH0 = -（<span class="number">11059200</span>/<span class="number">1000</span>） &gt;&gt; <span class="number">8</span>;</span><br><span class="line">    TR0 = <span class="number">1</span>;                        <span class="comment">//定时器0开始计时</span></span><br><span class="line">    ET0 = <span class="number">1</span>;                        <span class="comment">//使能定时器0中断</span></span><br><span class="line">    EA = <span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line"><span class="comment">//中断函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tm0_isr</span><span class="params">()</span> interrupt 1</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(time&gt;<span class="number">1</span>)time--;<span class="comment">//判断如果超时时间没有倒计时完成则时间记录-1</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(time== <span class="number">1</span>) &#123;<span class="comment">//倒计时完成</span></span><br><span class="line">		time = <span class="number">0</span>;		<span class="comment">//置0使下一次中断不再执行此过程</span></span><br><span class="line">		len = blen;		<span class="comment">//将缓存长度存入数据长度记录</span></span><br><span class="line">		blen = <span class="number">0</span>;		<span class="comment">//缓存长度记录清0，使下次接收数据重新定位</span></span><br><span class="line">		flag =<span class="number">1</span>;		<span class="comment">//标志位置1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="在while循环里监控flag数据标志位"><a href="#在while循环里监控flag数据标志位" class="headerlink" title="在while循环里监控flag数据标志位"></a>在while循环里监控flag数据标志位</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数据监控</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">uart_scanf</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(flag)&#123;<span class="comment">//检测到数据</span></span><br><span class="line">		flag = <span class="number">0</span>;<span class="comment">//清空标志位</span></span><br><span class="line">		<span class="keyword">if</span>(bf[<span class="number">0</span>] == <span class="number">2</span>)&#123;<span class="comment">//判断远端站号</span></span><br><span class="line">			<span class="keyword">if</span>(bf[<span class="number">1</span>] == <span class="number">3</span>)rr(bf[<span class="number">3</span>]);<span class="comment">//判断是否为读功能码，则解码数据并跳转函数</span></span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(bf[<span class="number">1</span>] == <span class="number">6</span>)wr(bf[<span class="number">3</span>],(bf[<span class="number">4</span>]&lt;&lt;<span class="number">8</span>)|bf[<span class="number">5</span>]);<span class="comment">//判断是否为写功能码</span></span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//串口发送函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sendb</span><span class="params">(u8 *str,u8 len)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(len--)&#123;</span><br><span class="line">		SBUF = *str++;</span><br><span class="line">		<span class="keyword">while</span>(!TI);</span><br><span class="line">		TI = <span class="number">0</span>;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//CRC16校验码生成函数</span></span><br><span class="line"><span class="function">u16 <span class="title">getcrc</span><span class="params">(u8 *str,u8 len)</span></span>&#123;</span><br><span class="line">	u16 c,i,s = <span class="number">0xffff</span>;</span><br><span class="line">	<span class="keyword">while</span>(len--)&#123;</span><br><span class="line">		s ^= *str++;</span><br><span class="line">		<span class="keyword">for</span>(i = <span class="number">0</span>;i&lt;<span class="number">8</span>;i++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(s&amp;<span class="number">1</span>)s = (s&gt;&gt;<span class="number">1</span>)^<span class="number">0xA001</span>;</span><br><span class="line">			<span class="keyword">else</span> s &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">	c = s&gt;&gt;<span class="number">8</span>;</span><br><span class="line">	c|= s&lt;&lt;<span class="number">8</span>;</span><br><span class="line">	<span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//读寄存器</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rr</span><span class="params">(u8 a)</span></span>&#123;</span><br><span class="line">	u16 c;</span><br><span class="line">	<span class="keyword">if</span>(a == <span class="number">1</span>)&#123;<span class="comment">//判断读地址</span></span><br><span class="line">		sb[<span class="number">3</span>] = <span class="number">1234</span>&gt;&gt;<span class="number">8</span>;<span class="comment">//写入数据到发送缓存数组</span></span><br><span class="line">		sb[<span class="number">4</span>] = <span class="number">1234</span>;</span><br><span class="line">		</span><br><span class="line">		sb[<span class="number">5</span>] = <span class="number">7890</span>&gt;&gt;<span class="number">8</span>;</span><br><span class="line">		sb[<span class="number">6</span>] = <span class="number">7890</span>;</span><br><span class="line">		c = getcrc(sb,<span class="number">7</span>);<span class="comment">//计算校验码</span></span><br><span class="line">		sb[<span class="number">7</span>] = c&gt;&gt;<span class="number">8</span>;</span><br><span class="line">		sb[<span class="number">8</span>] = c;</span><br><span class="line">		sendb(sb,<span class="number">9</span>);<span class="comment">//发送数据</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">wr</span><span class="params">(u8 a,u16 v)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a == <span class="number">5</span>)&#123;<span class="comment">//判断写地址</span></span><br><span class="line">		u16 tmp = v;<span class="comment">//获取数据</span></span><br><span class="line">	&#125;</span><br><span class="line">	sendb(bf,len);<span class="comment">//返回数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>** 此代码仅供参考 **</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/04/03/uart_dma_receive/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          STM32F429使用HAL库串口DMA不定长度数据接收
-        
-      </div>
-    </a>
   
   
-    <a href="/2020/02/12/ch340-auto-download/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">基于CH340的51单片机自动下载电路设计</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
-  
-  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-<script>
-  var cloudTieConfig = {
-    url: "https://2103210500.github.io/2020/03/13/51modbus/", 
-    sourceId: "51modbus",
-    productKey: "true",
-    target: "cloud-tie-wrapper"
-  };
-</script>
-<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -270,8 +207,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

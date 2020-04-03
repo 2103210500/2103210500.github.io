@@ -144,6 +144,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-uart_dma_receive" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/03/uart_dma_receive/">STM32F429使用HAL库串口DMA不定长度数据接收</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/03/uart_dma_receive/" class="archive-article-date">
+  	<time datetime="2020-04-03T15:23:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="MCU型号：STM32F429IGT6"><a href="#MCU型号：STM32F429IGT6" class="headerlink" title="MCU型号：STM32F429IGT6"></a>MCU型号：STM32F429IGT6</h4><h4 id="基于HAL库实现"><a href="#基于HAL库实现" class="headerlink" title="基于HAL库实现"></a>基于HAL库实现</h4><blockquote>
+<p>在stm32中，串口接收和发送大量数据时会占用很多系统资源，使用DMA传输会极大减轻CPU负担，我们在配置DMA接收串口数据时需要调用HAL_UART_Receive_DMA()函数来开启DMA接收，由于使用DMA接收，必须给它一个缓存数组，以及接收的长度，他才能自己去干这件事情，这就导致它的接收长度是一个相对固定的数，假如我定义接收20个字符，当我们数据是10个字符时，发送给串口，DMA并不会产生中断，因为数据没有达到定义的长度，这就很不方便。利用串口的空闲中断-UART_IT_IDLE，可实现数据接收结束的判断。</p>
+</blockquote>
+<p>定义缓存数组和数据长度变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint8_t</span> b_buf[<span class="number">256</span>] = &#123;<span class="number">0</span>&#125;;	<span class="comment">//数据缓存数组</span></span><br><span class="line"><span class="keyword">uint8_t</span> b_len = <span class="number">255</span>;		<span class="comment">//每次最大接收数据长度</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HAL_UART_Receive_DMA(&amp;huart1,(<span class="keyword">uint8_t</span>*)b_buf,b_len);	<span class="comment">//开启DMA接收</span></span><br><span class="line">__HAL_UART_ENABLE_IT(&amp;huart1,UART_IT_IDLE);				<span class="comment">//开启空闲中断</span></span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在STM32f4xx_hal_uart.c中 第2024行，判断UART_FLAG_IDLE标志位</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(__HAL_UART_GET_FLAG(huart,UART_FLAG_IDLE) != RESET) &#123;	<span class="comment">//判断RX空闲标志位</span></span><br><span class="line">   __HAL_UART_CLEAR_IDLEFLAG(huart);						<span class="comment">//清楚标志位</span></span><br><span class="line">   UART_IDLCallback(huart);									<span class="comment">//创建回调函数</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//声明回调函数</span></span><br><span class="line"><span class="function">__weak <span class="keyword">void</span> <span class="title">UART_IDLCallback</span><span class="params">(UART_HandleTypeDef *huart)</span> </span>&#123;</span><br><span class="line">	UNUSED(huart);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在main.c中重写回调函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">extern</span> DMA_HandleTypeDef hdma_usart1_rx;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UART_IDLCallback</span><span class="params">(UART_HandleTypeDef *huart)</span> </span>&#123;</span><br><span class="line">    HAL_UART_DMAStop(huart);<span class="comment">//停止DMA接收</span></span><br><span class="line">    <span class="keyword">uint8_t</span> data_lenth = b_len - __HAL_DMA_GET_COUNTER(&amp;hdma_usart1_rx);<span class="comment">//计算数据长度</span></span><br><span class="line">    </span><br><span class="line">	</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"接收完成\r\n"</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"数据长度：%d\r\n"</span>,data_lenth);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"数据内容：%s\r\n"</span>,b_buf);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">memset</span>(b_buf,<span class="number">0</span>,b_len);<span class="comment">//清空数据</span></span><br><span class="line">	</span><br><span class="line">    HAL_UART_Receive_DMA(huart,(<span class="keyword">uint8_t</span> *)b_buf,b_len);<span class="comment">//重新开启DMA</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实验结果图<br><img src="https://2103210500.github.io/2020/04/03/uart_dma_receive/b.PNG"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/03/uart_dma_receive/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-51modbus" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
