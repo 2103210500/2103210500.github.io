@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://2103210500.github.io">
-  <title>Archives: 2020 | 梦归处 Blog</title>
+  <title>51单片机按钮短长按和双击程序 | 梦归处 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="凯旋">
-<meta property="og:type" content="website">
-<meta property="og:title" content="梦归处 Blog">
-<meta property="og:url" content="https://2103210500.github.io/archives/2020/index.html">
+  <meta name="description" content="单片机型号：STC89C5xRC  引脚和变量定义12#define INT0_GPIO P32	&#x2F;&#x2F;中断IO引脚u8 key_flag &#x3D; 0;		&#x2F;&#x2F;按键按下标志  外部中断0初始化123IT0 &#x3D; 1; &#x2F;&#x2F;外部中断触发方式(1:下降沿，0：下降沿+上升沿)EX0 &#x3D; 1; &#x2F;&#x2F;打开外部中断EA &#x3D; 1;  中断函数12345678910111213141516void int0_fun(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机按钮短长按和双击程序">
+<meta property="og:url" content="https://2103210500.github.io/2020/05/04/button-exti/index.html">
 <meta property="og:site_name" content="梦归处 Blog">
-<meta property="og:description" content="凯旋">
+<meta property="og:description" content="单片机型号：STC89C5xRC  引脚和变量定义12#define INT0_GPIO P32	&#x2F;&#x2F;中断IO引脚u8 key_flag &#x3D; 0;		&#x2F;&#x2F;按键按下标志  外部中断0初始化123IT0 &#x3D; 1; &#x2F;&#x2F;外部中断触发方式(1:下降沿，0：下降沿+上升沿)EX0 &#x3D; 1; &#x2F;&#x2F;打开外部中断EA &#x3D; 1;  中断函数12345678910111213141516void int0_fun(">
 <meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-05-04T14:17:58.000Z">
+<meta property="article:modified_time" content="2020-05-04T14:32:06.209Z">
 <meta property="article:author" content="梦归处">
 <meta name="twitter:card" content="summary">
   
@@ -142,238 +144,108 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-button-exti" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      51单片机按钮短长按和双击程序
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/04/button-exti/" class="archive-article-date">
+
+        
+        <a href="/2020/05/04/button-exti/" class="archive-article-date">
   	<time datetime="2020-05-04T14:17:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-04</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/04/button-exti/">51单片机按钮短长按和双击程序</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>单片机型号：STC89C5xRC</p>
+</blockquote>
+<h4 id="引脚和变量定义"><a href="#引脚和变量定义" class="headerlink" title="引脚和变量定义"></a>引脚和变量定义</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INT0_GPIO P32	<span class="comment">//中断IO引脚</span></span></span><br><span class="line">u8 key_flag = <span class="number">0</span>;		<span class="comment">//按键按下标志</span></span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<h4 id="外部中断0初始化"><a href="#外部中断0初始化" class="headerlink" title="外部中断0初始化"></a>外部中断0初始化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IT0 = <span class="number">1</span>; <span class="comment">//外部中断触发方式(1:下降沿，0：下降沿+上升沿)</span></span><br><span class="line">EX0 = <span class="number">1</span>; <span class="comment">//打开外部中断</span></span><br><span class="line">EA = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<h4 id="中断函数"><a href="#中断函数" class="headerlink" title="中断函数"></a>中断函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">int0_fun</span><span class="params">()</span> interrupt 0</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">bit</span> double_flag = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">delay</span>(<span class="number">50</span>);<span class="comment">//延时消抖</span></span><br><span class="line">	<span class="keyword">if</span>(!INT0_GPIO)&#123;<span class="comment">//被按下</span></span><br><span class="line">		<span class="keyword">if</span>(button_delay(<span class="number">500</span>))&#123;<span class="comment">//长按500ms以上</span></span><br><span class="line">			key_flag = <span class="number">2</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span>(button_delay(<span class="number">50</span>))&#123;<span class="comment">//双击，第二次按100ms以上</span></span><br><span class="line">			double_flag = <span class="number">1</span>;		<span class="comment">//1避开长按，使长按途中有空闲时间执行其他任务，2防止双击松开是抖动产生的二次双击</span></span><br><span class="line">			key_flag = <span class="number">3</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;<span class="comment">//按键单击</span></span><br><span class="line">			key_flag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(!INT0_GPIO &amp;&amp; double_flag);<span class="comment">//等待双击按键被松开</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="main函数调用"><a href="#main函数调用" class="headerlink" title="main函数调用"></a>main函数调用</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(key_flag)&#123;</span><br><span class="line">	<span class="keyword">switch</span>(key_flag)&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>:P2 = (<span class="number">0x01</span>&lt;&lt;<span class="number">0</span>);<span class="keyword">break</span>;<span class="comment">//短按</span></span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:P2 = (<span class="number">0x01</span>&lt;&lt;<span class="number">1</span>);<span class="keyword">break</span>;<span class="comment">//长按</span></span><br><span class="line">		<span class="keyword">case</span> <span class="number">3</span>:P2 = (<span class="number">0x01</span>&lt;&lt;<span class="number">2</span>);<span class="keyword">break</span>;<span class="comment">//双击</span></span><br><span class="line">	&#125;</span><br><span class="line">	key_flag = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用到的延时函数-两个不可少"><a href="#使用到的延时函数-两个不可少" class="headerlink" title="使用到的延时函数 (两个不可少)"></a>使用到的延时函数 (两个不可少)</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delay</span><span class="params">(u16 u)</span>		<span class="comment">//@11.0592MHz</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> i, j;</span><br><span class="line">	<span class="keyword">while</span> (u--)</span><br><span class="line">	&#123;</span><br><span class="line">		_nop_();</span><br><span class="line">		i = <span class="number">2</span>;</span><br><span class="line">		j = <span class="number">199</span>;</span><br><span class="line">		<span class="keyword">do</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span> (--j)</span><br><span class="line">				;</span><br><span class="line">		&#125; <span class="keyword">while</span> (--i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="built_in">bit</span> <span class="title">button_delay</span><span class="params">(u16 u)</span>		<span class="comment">//@11.0592MHz</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> i, j;</span><br><span class="line">	<span class="keyword">if</span>(u == <span class="number">50</span>)<span class="built_in">delay</span>(<span class="number">100</span>);<span class="comment">//延时50ms以后再判断按钮是否被按下，否则在双击前抬起瞬间就会被跳过判断</span></span><br><span class="line">	<span class="keyword">while</span> (u--)</span><br><span class="line">	&#123;</span><br><span class="line">		_nop_();</span><br><span class="line">		i = <span class="number">2</span>;</span><br><span class="line">		j = <span class="number">199</span>;</span><br><span class="line">		<span class="keyword">do</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(INT0_GPIO)<span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//按键被松开时返回0</span></span><br><span class="line">			<span class="keyword">while</span> (--j)</span><br><span class="line">				;</span><br><span class="line">		&#125; <span class="keyword">while</span> (--i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>工程源码(Keil and VS code(EIDE))以及Proteus(V8.9)仿真<br>链接：<a href="https://pan.baidu.com/s/1P10nqMTQnNDS0q9ZyY6WIA" target="_blank" rel="noopener">https://pan.baidu.com/s/1P10nqMTQnNDS0q9ZyY6WIA</a><br>提取码：qi5h </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/03/uart_dma_receive/" class="archive-article-date">
-  	<time datetime="2020-04-03T15:23:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/03/uart_dma_receive/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">STM32F429使用HAL库串口DMA不定长度数据接收</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/03/uart_dma_receive/">STM32F429使用HAL库串口DMA不定长度数据接收</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://2103210500.github.io/2020/05/04/button-exti/", 
+    sourceId: "button-exti",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/13/51modbus/" class="archive-article-date">
-  	<time datetime="2020-03-13T11:02:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/13/51modbus/">51modbus</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/12/ch340-auto-download/" class="archive-article-date">
-  	<time datetime="2020-02-12T08:49:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/12/ch340-auto-download/">基于CH340的51单片机自动下载电路设计</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/06/lg_user/" class="archive-article-date">
-  	<time datetime="2020-02-06T05:39:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/06/lg_user/">力控登录界面账号密码判断逻辑</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/28/ws2812/" class="archive-article-date">
-  	<time datetime="2020-01-28T05:18:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/28/ws2812/">基于STM32实现WS2812驱动及GRB流水效果</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/27/modbus_crc16/" class="archive-article-date">
-  	<time datetime="2020-01-27T05:46:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/27/modbus_crc16/">基于51单片机的ModBus通讯协议CRC16校验</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/21/hello-world/" class="archive-article-date">
-  	<time datetime="2020-01-21T11:28:22.623Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/21/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -396,8 +268,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
