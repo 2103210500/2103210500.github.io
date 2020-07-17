@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://2103210500.github.io">
-  <title>梦归处 Blog</title>
+  <title>夏天的风 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="凯旋">
+  <meta name="description" content="老张">
 <meta property="og:type" content="website">
-<meta property="og:title" content="梦归处 Blog">
+<meta property="og:title" content="夏天的风 Blog">
 <meta property="og:url" content="https://2103210500.github.io/index.html">
-<meta property="og:site_name" content="梦归处 Blog">
-<meta property="og:description" content="凯旋">
+<meta property="og:site_name" content="夏天的风 Blog">
+<meta property="og:description" content="老张">
 <meta property="og:locale" content="zh">
-<meta property="article:author" content="梦归处">
+<meta property="article:author" content="夏天的风">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="梦归处 Blog" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="夏天的风 Blog" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -48,10 +48,10 @@
 			<img src="https://q1.qlogo.cn/g?b=qq&amp;nk=2103210500&amp;s=640" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">梦归处</a></h1>
+		  <h1 class="header-author"><a href="/">夏天的风</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">凯旋的博客</p>
+		<p class="header-subtitle">老张的博客</p>
 		
 
 		<nav class="header-menu">
@@ -100,10 +100,10 @@
 				<img src="https://q1.qlogo.cn/g?b=qq&amp;nk=2103210500&amp;s=640" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">梦归处</h1>
+			  <h1 class="header-author js-header-author">夏天的风</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>凯旋的博客<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>老张的博客<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -143,6 +143,74 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-littlevgl-platformio" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/17/littlevgl-platformio/">Windows 10系统使用Platform IO进行LitleVGL模拟器仿真</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/17/littlevgl-platformio/" class="archive-article-date">
+  	<time datetime="2020-07-17T11:34:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Windows-10系统使用Platform-IO进行LitleVGL模拟器仿真"><a href="#Windows-10系统使用Platform-IO进行LitleVGL模拟器仿真" class="headerlink" title="Windows 10系统使用Platform IO进行LitleVGL模拟器仿真"></a>Windows 10系统使用Platform IO进行LitleVGL模拟器仿真</h3><p>软件使用Visual Studio Code 1.48.0进行测试<br>Platform IO 4.3.4<br>安装MinGW64</p>
+<p>安装好以上软件及插件后分别下载必需的文件<br>lvgl官方的模拟器文档<br><a href="https://github.com/lvgl/lv_platformio" target="_blank" rel="noopener">https://github.com/lvgl/lv_platformio</a><br>下载lv_platformio-master.zip文件，将其解压到一个目录，我这解压到C:\Users\21032\Documents\platformio\lv_platformio-master<br>使用VSCode以工作区打开此文件夹</p>
+<p>下载SDL2<br><a href="http://www.libsdl.org/download-2.0.php" target="_blank" rel="noopener">http://www.libsdl.org/download-2.0.php</a><br>选择下载 SDL2-devel-2.0.10-mingw.tar.gz<br>解压<br> 找到SDL2-devel-2.0.12-mingw.tar.gz\SDL2-2.0.12\x86_64-w64-mingw32，将include目录复制到MinGW64安装的Include目录，我的位置是D:\Program Files (x86)\MingW64\lib\gcc\x86_64-w64-mingw32\8.1.0\include，将SDL2复制到include里去</p>
+<p> 并且将其复制到工作文件夹C:\Users\21032\Documents\platformio\lv_platformio\include里去</p>
+<p> 将SDL2-devel-2.0.12-mingw.tar.gz\SDL2-2.0.12\x86_64-w64-mingw32\lib内的.a文件复制到MinGW64的lib内D:\Program Files (x86)\MingW64\lib\gcc\x86_64-w64-mingw32\lib</p>
+<p> 回到VSCode，点击 终端-&gt;运行任务……-&gt;PlarformIO：Execute(native),运行仿真。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/17/littlevgl-platformio/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-button-exti" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -723,7 +791,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 梦归处
+    		&copy; 2020 夏天的风
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

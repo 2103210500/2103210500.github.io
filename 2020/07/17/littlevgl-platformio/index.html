@@ -6,15 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://2103210500.github.io">
-  <title>Archives: 2020 | 夏天的风 Blog</title>
+  <title>Windows 10系统使用Platform IO进行LitleVGL模拟器仿真 | 夏天的风 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="老张">
-<meta property="og:type" content="website">
-<meta property="og:title" content="夏天的风 Blog">
-<meta property="og:url" content="https://2103210500.github.io/archives/2020/index.html">
+  <meta name="description" content="Windows 10系统使用Platform IO进行LitleVGL模拟器仿真软件使用Visual Studio Code 1.48.0进行测试Platform IO 4.3.4安装MinGW64 安装好以上软件及插件后分别下载必需的文件lvgl官方的模拟器文档https:&#x2F;&#x2F;github.com&#x2F;lvgl&#x2F;lv_platformio下载lv_platformio-master.zip文件，将其">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows 10系统使用Platform IO进行LitleVGL模拟器仿真">
+<meta property="og:url" content="https://2103210500.github.io/2020/07/17/littlevgl-platformio/index.html">
 <meta property="og:site_name" content="夏天的风 Blog">
-<meta property="og:description" content="老张">
+<meta property="og:description" content="Windows 10系统使用Platform IO进行LitleVGL模拟器仿真软件使用Visual Studio Code 1.48.0进行测试Platform IO 4.3.4安装MinGW64 安装好以上软件及插件后分别下载必需的文件lvgl官方的模拟器文档https:&#x2F;&#x2F;github.com&#x2F;lvgl&#x2F;lv_platformio下载lv_platformio-master.zip文件，将其">
 <meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-07-17T11:34:36.000Z">
+<meta property="article:modified_time" content="2020-07-17T11:34:57.457Z">
 <meta property="article:author" content="夏天的风">
 <meta name="twitter:card" content="summary">
   
@@ -142,265 +144,100 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-littlevgl-platformio" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Windows 10系统使用Platform IO进行LitleVGL模拟器仿真
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/17/littlevgl-platformio/" class="archive-article-date">
+
+        
+        <a href="/2020/07/17/littlevgl-platformio/" class="archive-article-date">
   	<time datetime="2020-07-17T11:34:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-17</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/17/littlevgl-platformio/">Windows 10系统使用Platform IO进行LitleVGL模拟器仿真</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Windows-10系统使用Platform-IO进行LitleVGL模拟器仿真"><a href="#Windows-10系统使用Platform-IO进行LitleVGL模拟器仿真" class="headerlink" title="Windows 10系统使用Platform IO进行LitleVGL模拟器仿真"></a>Windows 10系统使用Platform IO进行LitleVGL模拟器仿真</h3><p>软件使用Visual Studio Code 1.48.0进行测试<br>Platform IO 4.3.4<br>安装MinGW64</p>
+<p>安装好以上软件及插件后分别下载必需的文件<br>lvgl官方的模拟器文档<br><a href="https://github.com/lvgl/lv_platformio" target="_blank" rel="noopener">https://github.com/lvgl/lv_platformio</a><br>下载lv_platformio-master.zip文件，将其解压到一个目录，我这解压到C:\Users\21032\Documents\platformio\lv_platformio-master<br>使用VSCode以工作区打开此文件夹</p>
+<p>下载SDL2<br><a href="http://www.libsdl.org/download-2.0.php" target="_blank" rel="noopener">http://www.libsdl.org/download-2.0.php</a><br>选择下载 SDL2-devel-2.0.10-mingw.tar.gz<br>解压<br> 找到SDL2-devel-2.0.12-mingw.tar.gz\SDL2-2.0.12\x86_64-w64-mingw32，将include目录复制到MinGW64安装的Include目录，我的位置是D:\Program Files (x86)\MingW64\lib\gcc\x86_64-w64-mingw32\8.1.0\include，将SDL2复制到include里去</p>
+<p> 并且将其复制到工作文件夹C:\Users\21032\Documents\platformio\lv_platformio\include里去</p>
+<p> 将SDL2-devel-2.0.12-mingw.tar.gz\SDL2-2.0.12\x86_64-w64-mingw32\lib内的.a文件复制到MinGW64的lib内D:\Program Files (x86)\MingW64\lib\gcc\x86_64-w64-mingw32\lib</p>
+<p> 回到VSCode，点击 终端-&gt;运行任务……-&gt;PlarformIO：Execute(native),运行仿真。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/05/04/button-exti/" class="archive-article-date">
-  	<time datetime="2020-05-04T14:17:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/04/button-exti/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">51单片机按钮短长按和双击程序</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/05/04/button-exti/">51单片机按钮短长按和双击程序</a>
-    </h1>
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "https://2103210500.github.io/2020/07/17/littlevgl-platformio/", 
+    sourceId: "littlevgl-platformio",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/04/03/uart_dma_receive/" class="archive-article-date">
-  	<time datetime="2020-04-03T15:23:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/03/uart_dma_receive/">STM32F429使用HAL库串口DMA不定长度数据接收</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/13/51modbus/" class="archive-article-date">
-  	<time datetime="2020-03-13T11:02:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/13/51modbus/">51modbus</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/12/ch340-auto-download/" class="archive-article-date">
-  	<time datetime="2020-02-12T08:49:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/12/ch340-auto-download/">基于CH340的51单片机自动下载电路设计</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/06/lg_user/" class="archive-article-date">
-  	<time datetime="2020-02-06T05:39:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/06/lg_user/">力控登录界面账号密码判断逻辑</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/28/ws2812/" class="archive-article-date">
-  	<time datetime="2020-01-28T05:18:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/28/ws2812/">基于STM32实现WS2812驱动及GRB流水效果</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/27/modbus_crc16/" class="archive-article-date">
-  	<time datetime="2020-01-27T05:46:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/27/modbus_crc16/">基于51单片机的ModBus通讯协议CRC16校验</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/21/hello-world/" class="archive-article-date">
-  	<time datetime="2020-01-21T11:28:22.623Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/21/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -423,8 +260,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
