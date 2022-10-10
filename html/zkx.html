@@ -1929,6 +1929,8 @@ display: inline-block;
       var date3 = document.getElementById('date3');
       var gender = document.getElementById('gender');
       var tel = document.getElementById('tel');
+      var xuehao = document.getElementById('xuehao');
+
       var student_name = document.getElementById('student_name');
       var student_name2 = document.getElementById('student_name2');      
 	var student_name3 = document.getElementById('student_name3');
@@ -1992,6 +1994,7 @@ document.onkeydown = function(e) {
       date1.innerHTML = $_GET["date1"];
       date2.innerHTML = $_GET["date2"];
       date3.innerHTML = $_GET["date3"];
+      xuehao.innerHTML = $_GET["xuehao"];
       gender.innerHTML = revertUTF8($_GET["gender"]);
       var s_n = revertUTF8('%3Cnobr%3E'+$_GET["student_name"]+'%3C/nobr%3E'); 
       student_name.innerHTML = s_n;
