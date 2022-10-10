@@ -24,20 +24,22 @@
     <link href="http://e-office.nuist.edu.cn/infoplus/static/themes/default/mobile/css/theme.css?v=20211117-095344" rel="stylesheet">
     <link type="text/css" media="all" rel="stylesheet" id="infoplus_view_6876_0_cached_link" href="http://e-office.nuist.edu.cn/infoplus/form/css/1b17faf0245e53f306dbd0b9a6a25a08.css">
   </head>
-
   <link rel="stylesheet" href="demo.css">
   <link rel="stylesheet" href="iconfont.css">
-  <script src="iconfont.js"></script>
+  <script src="iconfont.js">
+  </script>
   
   <body class="">
-
     <style text="text/css">
-	
+.student_name3 {
+display: inline-block;
+}
+.student_name4 {
+display: inline-block;
+}
     </style>
-    <script type="text/javascript">
-	var txt = '20200000';
-	document.getElementById('label_5b0f21c0-2d06-405e-bf3e-16f608c2c070').innerText=txt
-    </script>
+    <script type="text/javascript">var txt = '20200000';
+      document.getElementById('label_5b0f21c0-2d06-405e-bf3e-16f608c2c070').innerText = txt</script>
     <div id="help_content">
     </div>
     <div id="div_loader" style="display: none;">
@@ -1666,7 +1668,7 @@
                                         <td style="BORDER-TOP: #0070c0 1pt solid; BORDER-RIGHT: #0070c0 1pt solid; VERTICAL-ALIGN: middle; BORDER-BOTTOM: #0070c0 1pt solid; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; PADDING-LEFT: 5px; BORDER-LEFT: #0070c0 1pt solid; PADDING-RIGHT: 5px; BACKGROUND-COLOR: #f2f2f2" colspan="3">
                                           <div align="center">
                                             <div class="infoplus_labelControlContainer inline" id="label_4493cafe-66e3-4147-a6d7-aa6cd822bdbc_Container">
-                                              <div style="FONT-SIZE: small;font-family:'PingFang SC',微软雅黑; WIDTH: 100%;" title="" class="infoplus_control infoplus_labelControl inline" id="label_4493cafe-66e3-4147-a6d7-aa6cd822bdbc">张凯旋</div>
+                                              <div style="FONT-SIZE: small;font-family:'PingFang SC',微软雅黑; WIDTH: 100%;" title="" class="infoplus_control infoplus_labelControl inline" id="student_name2">张凯旋</div>
                                             </div>
                                           </div>
                                         </td>
@@ -1877,7 +1879,7 @@
                   <div class="form_remark_title">
                     <span class="color_b2" style="">
                       <span class="">
-                        <b>您(张凯旋)</b>
+                        <b>您(<div class = "student_name3">张凯旋</div>)</b>
                       </span>填写/办理了
                       <b>
                         <a target="_blank" title="查看该环节表单的快照" href="http://e-office.nuist.edu.cn/infoplus/form/4959475/render?snapshot=true">申请人销假</a>
@@ -1892,7 +1894,7 @@
                   <div class="form_remark_title">
                     <span class="color_b2" style="">
                       <span class="">
-                        <b>您(张凯旋)</b>
+                        <b>您(<div class = "student_name4">张凯旋</div>)</b>
                       </span>填写/办理了
                       <b>
                         <a target="_blank" title="查看该环节表单的快照" href="http://e-office.nuist.edu.cn/infoplus/form/4959458/render?snapshot=true">申请人</a>
@@ -1922,72 +1924,76 @@
     <div id="div_invoice">
     </div>
     <iframe id="alive" src="cid:frame-EC4E05CAAD78D50852CD03F34399C3A3@mhtml.blink" style="display: none; border:0">unsupported.</iframe>
-    
-    
-<script type="text/javascript">
-    var date1 = document.getElementById('date1');
-    var date2 = document.getElementById('date2');
-    var date3 = document.getElementById('date3');
-    var gender = document.getElementById('gender');
-    var tel = document.getElementById('tel');
-    var student_name = document.getElementById('student_name');
+    <script type="text/javascript">var date1 = document.getElementById('date1');
+      var date2 = document.getElementById('date2');
+      var date3 = document.getElementById('date3');
+      var gender = document.getElementById('gender');
+      var tel = document.getElementById('tel');
+      var student_name = document.getElementById('student_name');
+      var student_name2 = document.getElementById('student_name2');      
+	var student_name3 = document.getElementById('student_name3');
+      var student_name4 = document.getElementById('student_name4');
 
-function revertUTF8(szInput) {
-	var x,wch,wch1,wch2,uch="",szRet="";
-	for (x=0; x<szInput.length; x++) {
-		if (szInput.charAt(x)=="%") {
-			wch =parseInt(szInput.charAt(++x) + szInput.charAt(++x),16);
-			if (!wch) {break;}
-			if (!(wch & 0x80)) {
-				wch = wch;
-			} else if (!(wch & 0x20)) {
-				x++;
-				wch1 = parseInt(szInput.charAt(++x) + szInput.charAt(++x),16);
-				wch  = (wch & 0x1F)<< 6;
-				wch1 = wch1 & 0x3F;
-				wch  = wch + wch1;
-			} else {
-				x++;
-				wch1 = parseInt(szInput.charAt(++x) + szInput.charAt(++x),16);
-				x++;
-				wch2 = parseInt(szInput.charAt(++x) + szInput.charAt(++x),16);
-				wch  = (wch & 0x0F)<< 12;
-				wch1 = (wch1 & 0x3F)<< 6;
-				wch2 = (wch2 & 0x3F);
-				wch  = wch + wch1 + wch2;
-			}
-			szRet += String.fromCharCode(wch);
-		} else {
-			szRet += szInput.charAt(x);
-		}
-	}
-	return(szRet);
-}
+      function revertUTF8(szInput) {
+        var x, wch, wch1, wch2, uch = "",
+        szRet = "";
+        for (x = 0; x < szInput.length; x++) {
+          if (szInput.charAt(x) == "%") {
+            wch = parseInt(szInput.charAt(++x) + szInput.charAt(++x), 16);
+            if (!wch) {
+              break;
+            }
+            if (! (wch & 0x80)) {
+              wch = wch;
+            } else if (! (wch & 0x20)) {
+              x++;
+              wch1 = parseInt(szInput.charAt(++x) + szInput.charAt(++x), 16);
+              wch = (wch & 0x1F) << 6;
+              wch1 = wch1 & 0x3F;
+              wch = wch + wch1;
+            } else {
+              x++;
+              wch1 = parseInt(szInput.charAt(++x) + szInput.charAt(++x), 16);
+              x++;
+              wch2 = parseInt(szInput.charAt(++x) + szInput.charAt(++x), 16);
+              wch = (wch & 0x0F) << 12;
+              wch1 = (wch1 & 0x3F) << 6;
+              wch2 = (wch2 & 0x3F);
+              wch = wch + wch1 + wch2;
+            }
+            szRet += String.fromCharCode(wch);
+          } else {
+            szRet += szInput.charAt(x);
+          }
+        }
+        return (szRet);
+      }
 
-var $_GET = (function(){
-    var url = window.document.location.href.toString();
-    var u = url.split("?");
-    if(typeof(u[1]) == "string"){
-        u = u[1].split("&");
-        var get = {};
-        for(var i in u){
+      var $_GET = (function() {
+        var url = window.document.location.href.toString();
+        var u = url.split("?");
+        if (typeof(u[1]) == "string") {
+          u = u[1].split("&");
+          var get = {};
+          for (var i in u) {
             var j = u[i].split("=");
             get[j[0]] = j[1];
+          }
+          return get;
+        } else {
+          return {};
         }
-        return get;
-    } else {
-        return {};
-    }
-})();
-     date1.innerHTML= $_GET["date1"];
-     date2.innerHTML= $_GET["date2"];
-     date3.innerHTML= $_GET["date3"];
-     gender.innerHTML= revertUTF8($_GET["gender"]);
-     student_name.innerHTML= revertUTF8($_GET["student_name"]);
-     tel.innerHTML= $_GET["tel"];
-</script>
-
-
+      })();
+      date1.innerHTML = $_GET["date1"];
+      date2.innerHTML = $_GET["date2"];
+      date3.innerHTML = $_GET["date3"];
+      gender.innerHTML = revertUTF8($_GET["gender"]);
+      var s_n = revertUTF8($_GET["student_name"]); 
+      student_name.innerHTML = s_n;
+	student_name2.innerHTML = s_n;
+student_name3.innerHTML = s_n;
+student_name4.innerHTML = s_n;
+      tel.innerHTML = $_GET["tel"];</script>
   </body>
 
 </html>
